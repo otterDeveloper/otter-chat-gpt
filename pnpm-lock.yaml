@@ -3,6 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@types/inquirer': ^9.0.3
   '@types/node': ^18.14.4
+  dotenv: ^16.0.3
   inquirer: ^9.1.4
   openai: ^3.2.1
   prettier: ^2.8.4
@@ -10,6 +11,7 @@ specifiers:
   typescript: ^4.9.5
 
 dependencies:
+  dotenv: 16.0.3
   inquirer: 9.1.4
   openai: 3.2.1
 
@@ -461,6 +463,11 @@ packages:
     dependencies:
       path-type: 4.0.0
     dev: true
+
+  /dotenv/16.0.3:
+    resolution: {integrity: sha512-7GO6HghkA5fYG9TYnNxi14/7K9f5occMlp3zXAuSxn7CKCxt9xbNWG7yF8hTCSUchlfWSe3uLmlPfigevRItzQ==}
+    engines: {node: '>=12'}
+    dev: false
 
   /eastasianwidth/0.2.0:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}

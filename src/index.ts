@@ -1,4 +1,5 @@
 import inquirer from "inquirer";
+import * as dotenv from "dotenv";
 async function main() {
 	const { context } = await inquirer.prompt<{ context: string }>({
 		type: "editor",
@@ -9,4 +10,5 @@ async function main() {
 	console.log(context);
 }
 
+dotenv.config();
 main();
