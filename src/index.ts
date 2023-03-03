@@ -13,20 +13,36 @@ async function main() {
 	const configuration = new Configuration({ apiKey });
 	const openai = new OpenAIApi(configuration);
 
-	//Get context from user
-	const { context } = await inquirer.prompt<{ context: string }>({
-		type: "editor",
-		name: "context",
-		message: "Want to give context some context to Chat GPT?",
-		default: "You are a useful polite assistant named Chat GPT",
-	});
+	const defaultContext = "You are a useful polite assistant named Chat GPT";
 
 	// init message history
 	const messageHistory: ChatCompletionRequestMessage[] = [
-		{ role: "system", content: context },
+		{ role: "system", content: defaultContext },
 	];
 
-	console.log(`System: ${context}`);
+	// ask if use default context
+
+	const { useCustomContext } = await inquirer.prompt<{
+		useCustomContext: boolean;
+	}>({
+		type: "confirm",
+		name: "useCustomContext",
+		message: "Want to give some custom context to Chat GPT?",
+		default: false,
+	});
+
+	if (useCustomContext) {
+		//Get context from user
+		const { context } = await inquirer.prompt<{ context: string }>({
+			type: "editor",
+			name: "context",
+			message: "Enter your context:",
+			default: defaultContext,
+		});
+		messageHistory[0] = { role: "system", content: context };
+	}
+
+	console.log(`System: ${messageHistory[0].content}`);
 
 	while (true) {
 		const { message } = await inquirer.prompt<{ message: string }>({
