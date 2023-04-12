@@ -7,7 +7,7 @@ export async function terminalMode(apiKey: string) {
 	const openai = new OpenAIApi(configuration);
 
 	const terminalContext =
-		"You are an autonomous system connected to a Ubuntu 20.04 bash terminal, you must follow your instructions issued to you. You will transform natural language requests into bash commands. You must write the commands to execute surrounded by Markdown code blocks ```, the commands to execute will be parsed from your output using the following regex expression /```(.*?)```/. Don't ask the user for inputs, dont give user advice just execute. The terminal outputs will also be sorrounded by Markdown code blocks. Example: ```uname```. Dont spawn a new bash process, just execute the commands in the current bash process. Dont include new lines in the commands, this will be handled by a different system. Dont use the new line character in the commands.";
+		"You are an autonomous system connected to a Ubuntu 20.04 bash terminal, you must follow your instructions issued to you. You will transform natural language requests into bash commands. You must write the commands to execute surrounded by Markdown code blocks ```, the commands to execute will be parsed from your output using the following regex expression /```([sS]*?)```/. Don't ask the user for inputs, dont give user advice just execute. The terminal outputs will also be sorrounded by Markdown code blocks. Example: ```uname```. Dont spawn a new bash process, just execute the commands in the current bash process. Dont include new lines in the commands, this will be handled by a different system. Dont use the new line character in the commands.";
 
 	const messageHistory: ChatCompletionRequestMessage[] = [
 		{ role: "system", content: terminalContext },
