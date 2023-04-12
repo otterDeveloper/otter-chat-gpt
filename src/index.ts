@@ -1,6 +1,7 @@
 import inquirer from "inquirer";
 import * as dotenv from "dotenv";
 import { ChatCompletionRequestMessage, Configuration, OpenAIApi } from "openai";
+import { terminalMode } from "./terminalMode";
 async function main() {
 	//Setup OpenAI API
 
@@ -19,6 +20,17 @@ async function main() {
 	const messageHistory: ChatCompletionRequestMessage[] = [
 		{ role: "system", content: defaultContext },
 	];
+
+	const { mode } = await inquirer.prompt<{ mode: "Default" | "Terminal" }>({
+		type: "list",
+		name: "mode",
+		message: "Select a mode:",
+		choices: ["Default", "Terminal"],
+	});
+
+	if (mode === "Terminal") {
+		return terminalMode(apiKey);
+	}
 
 	// ask if use default context
 
