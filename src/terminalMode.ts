@@ -43,10 +43,11 @@ export async function terminalMode(apiKey: string) {
 		});
 
 		const answer = response.data.choices[0].message?.content;
+		const tokensUsed = response.data.usage?.total_tokens;
 		//push the answer to the message history
 		messageHistory.push({ role: "assistant", content: `${answer}` ?? "" });
 
-		console.log(`Chat GPT: ${answer}`);
+		console.log(`Chat GPT[${tokensUsed}/4096]: ${answer}`);
 
 		// get the tex sorrounded by ```
 		const strippedCommand = answer?.match(/```([\s\S]*?)```/)?.[1] ?? "";
